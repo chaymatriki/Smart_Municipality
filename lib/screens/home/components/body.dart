@@ -18,38 +18,15 @@ class _FraudListState extends State<FraudList> {
   @override
   void initState() {
     super.initState();
-    //_getFrauds();
   }
 
-
-  //IMPORTANT : Mobile and computer must be connected to same LAN + Private LAN for computer + IP from ipconfig wireless wifi
   _getFrauds() async {
     List itemsList = [];
     var ret;
     try {
-      var url = 'http://10.128.1.62:3000/allforms';
+      var url = API_URL + '/allforms';
       var res  = await http.get(Uri.parse(url));
       if (res.statusCode == 200) {
-
-        /*frauds = fraudModelFromJson(res.body);
-        /*print(itemsList);
-        itemsList.forEach((element) {
-          print(element.photo);
-
-        });*/
-
-        frauds.forEach((element) {
-          print(element);
-           itemsList.add(FraudModel(
-              id: element.id,
-              photo: element.photo,
-              title: element.title,
-              body: element.body,
-              postedBy: element.postedBy,
-              date: element.date));
-        });*/
-        //var jsonObj = json.decode(res.body);
-        //ret = jsonObj['posts'];
         ret = res.body;
         frauds = fraudModelFromJson(res.body);
       }
@@ -60,13 +37,6 @@ class _FraudListState extends State<FraudList> {
     }
   }
 
-  /*_getFrauds() async {
-    var res  = await http.get(Uri.parse('http://192.168.1.177:3000/allforms'));
-    if (res.statusCode == 200) {
-      var jsonObj = json.decode(res.body);
-    return jsonObj['posts']; }
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -76,14 +46,15 @@ class _FraudListState extends State<FraudList> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(90, 10, 0, 30),
                 child: Text(
                   "Frauds",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: Color(0xfff7892b),
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Expanded(

@@ -22,14 +22,14 @@ class Body extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: size.height * 0.3),
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     //top: size.height * 0.12,
                     left: kDefaultPaddin,
                     right: kDefaultPaddin,
                   ),
                   // height: 500,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
+                  decoration: const BoxDecoration(
+                    color: Color(0xfff7892b),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(24),
                       topRight: Radius.circular(24),

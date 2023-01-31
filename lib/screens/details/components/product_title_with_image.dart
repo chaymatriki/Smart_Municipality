@@ -22,7 +22,7 @@ class ProductTitleWithImage extends StatelessWidget {
               TextSpan(
                 text: "Fraud title : \n",
                 style: Theme.of(context).textTheme.headline6.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.bold),
+                    color: Color(0xfff7892b), fontWeight: FontWeight.bold),
               ),
               TextSpan(text: fraud.title, style: TextStyle(color: Colors.black, fontSize: 20)),
             ],
@@ -33,7 +33,7 @@ class ProductTitleWithImage extends StatelessWidget {
               TextSpan(
                 text: "Fraud location : \n",
                 style: Theme.of(context).textTheme.headline6.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.bold),
+                    color: Color(0xfff7892b), fontWeight: FontWeight.bold),
               ),
               TextSpan(text: fraud.location.address, style: TextStyle(color: Colors.black, fontSize: 15)),
             ],
@@ -44,7 +44,7 @@ class ProductTitleWithImage extends StatelessWidget {
               TextSpan(
                 text: "Descrition : \n",
                 style: Theme.of(context).textTheme.headline6.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.bold),
+                    color: Color(0xfff7892b), fontWeight: FontWeight.bold),
               ),
               TextSpan(text: fraud.body, style: TextStyle(color: Colors.black, fontSize: 17)),
             ],

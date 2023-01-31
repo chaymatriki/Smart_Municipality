@@ -16,18 +16,6 @@ class Description extends StatefulWidget {
 }
 
 class _DescriptionState extends State<Description> {
-  /*_getImage(String filename) async {
-    try {
-      var url = 'http://192.168.4.95:3000/uploads/'+filename;
-      var res  = await http.get(Uri.parse(url));
-      if (res.statusCode == 200) {
-        return res.body;
-      }
-    } catch (e) {
-      print(e);
-      return null;
-    }
-  }*/
   @override
   void initState() {
     super.initState();
@@ -38,11 +26,7 @@ class _DescriptionState extends State<Description> {
       padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
       child: Hero(
         tag: "${widget.fraud.id}",
-        /*child: Image.asset(
-          (fraud.photo),
-          fit: BoxFit.fill,
-        ),*/
-        child: Image.network("http://192.168.4.95:3000/uploads/"+"${widget.fraud.photo}",
+        child: Image.network(API_URL + "/uploads/"+"${widget.fraud.photo}",
             fit: BoxFit.fill),
       ),
     );

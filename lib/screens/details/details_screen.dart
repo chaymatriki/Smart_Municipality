@@ -12,8 +12,8 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFE0B2),
-      appBar: buildAppBar(context),
+      backgroundColor: Colors.white,
+      appBar: buildAppBar(context,),
       body: Body(fraud: fraud),
     );
   }
@@ -21,6 +21,7 @@ class DetailsScreen extends StatelessWidget {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 0,
+      backgroundColor: Color(0xfff7892b),
       leading: IconButton(
         icon: SvgPicture.asset(
           'assets/icons/back.svg',
@@ -28,17 +29,6 @@ class DetailsScreen extends StatelessWidget {
         ),
         onPressed: () => Navigator.pop(context),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/search.svg"),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/cart.svg"),
-          onPressed: () {},
-        ),
-        SizedBox(width: kDefaultPaddin / 2)
-      ],
     );
   }
 }

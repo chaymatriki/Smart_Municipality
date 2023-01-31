@@ -21,14 +21,14 @@ class ItemCard extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(kDefaultPaddin),
+              padding: EdgeInsets.all(10.0),
               decoration: BoxDecoration(
-                color: Color(0xFFFFE0B2),
+                color: Color(0xfff7892b),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
                 tag: "${fraud.id}",
-                child: Image.network("http://192.168.4.95:3000/uploads/"+fraud.photo,
+                child: Image.network(API_URL + "/uploads/"+fraud.photo,
                     fit: BoxFit.fill),
               ),
             ),

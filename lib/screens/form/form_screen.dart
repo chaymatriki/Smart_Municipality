@@ -44,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Retourner',
+            Text('Back',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
           ],
         ),
@@ -53,8 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   onSync() async {
-    var url = Uri.parse('http://192.168.4.95:3000/fillinform');
-    //var authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ExODdlNWQzOTdjZWFkNTMwNGJkZjAiLCJpYXQiOjE2NzE5MDIzMDV9.0oPFZAJy9e7BfuR9QCjQowI6JkejOpzHUtOfFcV_OXI';
+    var url = Uri.parse(API_URL + '/fillinform');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var authToken = prefs.getString(KEY_ACCESS_TOKEN);
     var request = http.MultipartRequest('POST', url);
@@ -68,100 +67,6 @@ class _SignUpPageState extends State<SignUpPage> {
     request.files.add(await http.MultipartFile.fromPath('picture', image.path));
     var res = await request.send();
     print(res.reasonPhrase);
-    /*try {
-      var url = Uri.parse('http://192.168.1.161:3000/fillinform');
-      var response = await http.post(url, headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ExODdlNWQzOTdjZWFkNTMwNGJkZjAiLCJpYXQiOjE2NzE5MDIzMDV9.0oPFZAJy9e7BfuR9QCjQowI6JkejOpzHUtOfFcV_OXI",
-        "Content-Type": "application/json"
-      }, body: jsonEncode({
-        "title": titleController.text,
-        "body": descriptionController.text,
-        "location": {
-          "type": "Point",
-          "address": position.address,
-          "latitude": position.latitude,
-          "longitude": position.longitude
-        }
-      }));
-      print('Response status: ${response.statusCode}');
-      print('Response <body: ${response.body}');
-    } catch (e) {
-      print(e);
-    }*/
-    //jwt authentication token
-    /*print(image.path);
-    var authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ExODdlNWQzOTdjZWFkNTMwNGJkZjAiLCJpYXQiOjE2NzE5MDIzMDV9.0oPFZAJy9e7BfuR9QCjQowI6JkejOpzHUtOfFcV_OXI';
-
-    try {
-      FormData formData =
-      new FormData.fromMap({
-        "title": titleController.text,
-        "body": descriptionController.text,
-        "location": {
-          "type": "Point",
-          "address": position.address,
-          "latitude": position.latitude,
-          "longitude": position.longitude
-        },
-        "photo":
-        await MultipartFile.fromFile(image.path, filename: "aPhoto")
-      });
-
-      Response response =
-      await Dio().post(
-          "http://192.168.1.161:3000/fillinform",
-          data: formData,
-          options: Options(
-              headers: <String, String>{
-                'Authorization': 'Bearer $authToken',
-              }
-          )
-      );
-      return response;
-    }on DioError catch (e) {
-      return e.response;
-    } catch(e){
-    }*/
-
-    /*var request = http.MultipartRequest("POST",Uri.parse("http://192.168.1.161:3000/fillinform"));
-    request.fields['title'] = titleController.text;
-    request.fields['body'] = descriptionController.text;
-    request.fields['location[type]'] = "Point";
-    request.fields['location[address]'] = position.address;
-    request.fields['location[latitude]'] = position.latitude.toString();
-    request.fields['location[longitude]'] = position.longitude.toString();
-    request.headers['Authorization'] = "Bearer " + authToken;
-    var imageBytes = image.readAsBytes();
-    String extension = image.name.split(".").last;
-    request.files.add(new http.MultipartFile.fromBytes('file', await File(image.path).readAsBytes(), contentType: new MediaType('image', 'jpeg')));
-
-    var response = await request.send();
-    var responseData = await response.stream.toBytes();
-    var result = String.fromCharCodes(responseData);
-    print(result);*/
-
-
-
-    /*try {
-    FormData formData = new FormData.fromMap({
-      "title": titleController.text,
-      "body": descriptionController.text,
-      "location[type]": "Point",
-      "location[address]": position.address,
-      "location[latitude]": position.latitude.toString(),
-      "location[longitude]": position.longitude.toString(),
-      //"photo": await MultipartFile.fromFile(image.path,
-        //  filename: image.path.split('/').last)
-    });
-    print(image.path);
-    Dio dio = new Dio();
-    dio.options.headers["Authorization"] = "Bearer $authToken";
-    Response response = await dio.post('http://192.168.1.161:3000/fillinform', data: formData);
-    print(response);
-    } catch(e)
-    {print(e);}*/
-
-
   }
 
   Widget _entryField() {
@@ -171,9 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
-            height: 5,
-          ),
+          SizedBox(height: 5),
           Form(
             key: _formKey,
             child: Column(
@@ -183,10 +86,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 TextFormField(
                   autovalidateMode: _autoValidate,
                   controller: titleController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       fillColor: Color(0xfff3f3f4),
-                      labelText: 'Fraud title',
+                      labelText: 'Title',
                       hintText: "Enter fraud title",
                       hintStyle: TextStyle(fontSize: 13),
                       helperText: 'characters only',
@@ -274,11 +177,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      style : ButtonStyle(
+                      style : const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll<Color>(Color(0xfffbb448)),
                       ),
                       onPressed: () {
-                        localizationAlert();
+                        _goToMaps(context);
                       },
                       child: Text('Location'),
                     ),
@@ -324,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 blurRadius: 5,
                 spreadRadius: 2)
           ],
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [Color(0xfffbb448), Color(0xfff7892b)])),
@@ -333,8 +236,8 @@ class _SignUpPageState extends State<SignUpPage> {
           onSync();
           //_validateInputs();
         },
-        child: Text(
-          'Soumettre',
+        child: const Text(
+          'Submit',
           style: TextStyle(
             fontSize: 30
           ),
@@ -349,8 +252,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-              text: 'Dénoncer une fraude',
-              style: TextStyle(color: Color(0xffe46b10), fontSize: 24),
+              text: 'Report a violation',
+              style: TextStyle(color: Color(0xffe46b10), fontSize: 28, fontWeight: FontWeight.bold),
             ),
 
     );
@@ -433,8 +336,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       backgroundColor: MaterialStatePropertyAll<Color>(Color(0xfffbb448)),
                     ),
                     onPressed: () {
-                      //Navigator.pop(context);
-                      //getImage(ImageSource.gallery);
+                      Navigator.pop(context);
                       _goToMaps(context);
                     },
                     child: Row(
@@ -453,7 +355,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _goToMaps(BuildContext context) async {
 
-    // start the SecondScreen and wait for it to finish with a result
     final result = await Navigator.push(
         context,
         MaterialPageRoute(

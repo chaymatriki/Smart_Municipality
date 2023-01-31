@@ -5,7 +5,7 @@ const kTextLightColor = Color(0xFFACACAC);
 
 const kDefaultPaddin = 20.0;
 
-const MONGO_URL="mongodb+srv://admin:admin@cluster0.zi1f2az.mongodb.net/sigFraudApp?retryWrites=true&w=majority";
+const API_URL="http://192.168.4.95:3000";
 const FRAUD_COLLECTION="frauds";
 
 const KEY_ACCESS_TOKEN="access_token";
